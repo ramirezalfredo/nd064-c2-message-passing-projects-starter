@@ -1,0 +1,123 @@
+---
+openapi: 3.0.0
+info:
+  title: Persons API
+  description: Persons API for UdaConnect
+  contact:
+    email: ramirez.alfredo@gmail.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.0
+servers:
+- url: https://virtserver.swaggerhub.com/ramirezalfredo/Persons/1.0.0
+  description: SwaggerHub API Auto Mocking
+tags:
+- name: admins
+  description: Secured Admin-only calls
+- name: developers
+  description: Operations available to regular developers
+paths:
+  /persons:
+    get:
+      tags:
+      - developers
+      summary: retrieves persons
+      description: |
+        By passing in the appropriate options, you can search for
+        available inventory in the system
+      operationId: getPersons
+      parameters:
+      - name: id
+        in: query
+        description: pass an optional Person ID to retrieve a single record
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: all registered persons
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Person'
+        "400":
+          description: bad input parameter
+    post:
+      tags:
+      - admins
+      summary: add a new person
+      description: Add a new Person to the system
+      operationId: addPerson
+      requestBody:
+        description: Person to add
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Person'
+      responses:
+        "201":
+          description: new person created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Person'
+        "400":
+          description: invalid input, object invalid
+        "409":
+          description: an existing item already exists
+  /persons/{id}:
+    get:
+      tags:
+      - developers
+      summary: retrieves person by id
+      description: |
+        By passing in the appropriate options, you can search for
+        available inventory in the system
+      operationId: getPersonsByID
+      parameters:
+      - name: id
+        in: path
+        description: pass an optional Person ID to retrieve a single record
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: all registered persons
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Person'
+        "400":
+          description: bad input parameter
+components:
+  schemas:
+    Person:
+      required:
+      - company_name
+      - first_name
+      - id
+      - last_name
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 2
+        first_name:
+          type: string
+          example: Alfredo
+        last_name:
+          type: string
+          example: Ramirez
+        company_name:
+          type: string
+          example: Microsoft

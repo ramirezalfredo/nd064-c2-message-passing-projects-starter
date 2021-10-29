@@ -1,0 +1,98 @@
+openapi: 3.0.0
+servers:
+  # Added by API Auto Mocking Plugin
+  - description: SwaggerHub API Auto Mocking
+    url: https://virtserver.swaggerhub.com/ramirezalfredo/Locations/1.0.0
+info:
+  version: 1.0.0
+  title: 'Locations API'
+  description: 'Adds a new location'
+  contact:
+    email: 'ramirez.alfredo@gmail.com'
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+tags:
+  - name: admins
+    description: Secured Admin-only calls
+  - name: developers
+    description: Operations available to regular developers
+paths:
+  /locations:
+    post:
+      tags:
+        - admins
+      summary: add a new location
+      operationId: addLocation
+      description: Add a new Location to the system
+      responses:
+        '201':
+          description: 'new location created'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Location'
+        '400':
+          description: 'invalid input, object invalid'
+        '409':
+          description: 'an existing item already exists'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Location'
+        description: Location to add
+  /locations/{id}:
+    get:
+      tags:
+        - developers
+      summary: retrieves locations
+      operationId: getLocationsByID
+      description: |
+        By passing in the location ID, you can retrieve
+        a single locations registered in the system
+      parameters:
+        - in: path
+          name: id
+          description: pass an optional Location ID to retrieve a single record
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: all locations
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Location'
+        '400':
+          description: bad input parameter
+components:
+  schemas:
+    Location:
+      type: object
+      required:
+        - id
+        - person_id
+        - latitude
+        - longitude
+        - creation_time
+      properties:
+        id:
+          type: integer
+          example: 30
+        person_id:
+          type: integer
+          example: 5
+        latitude:
+          type: string
+          example: '-122.290883'
+        longitude:
+          type: string
+          example: '37.55363'
+        creation_time:
+          type: string
+          format: date-time
+          example: '2020-08-15T10:37:06'

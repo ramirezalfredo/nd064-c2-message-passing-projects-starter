@@ -1,0 +1,126 @@
+openapi: 3.0.0
+servers:
+  # Added by API Auto Mocking Plugin
+  - description: SwaggerHub API Auto Mocking
+    url: https://virtserver.swaggerhub.com/ramirezalfredo/Connections/1.0.0
+info:
+  version: 1.0.0
+  title: Connections API
+  description: Connections in UdaConnect
+  contact:
+    email: 'ramirez.alfredo@gmail.com'
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+tags:
+  - name: admins
+    description: Secured Admin-only calls
+  - name: developers
+    description: Operations available to regular developers
+paths:
+  /connections/{id}/connection:
+    get:
+      tags:
+        - developers
+      summary: retrieves connections
+      operationId: getConnections
+      description: |
+        By passing in the appropriate options, you can retrieve
+        the connections a person can make in the convention
+      parameters:
+        - in: path
+          name: id
+          description: pass an optional Location ID to retrieve a single record
+          required: true
+          schema:
+            type: integer
+        - in: query
+          name: start_date
+          description: pass an optional Location ID to retrieve a single record
+          required: true
+          schema:
+            type: string
+            format: date
+        - in: query
+          name: end_date
+          description: pass an optional Location ID to retrieve a single record
+          required: true
+          schema:
+            type: string
+            format: date
+        - in: query
+          name: distance
+          description: pass an optional Location ID to retrieve a single record
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: all connections associated to a person
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Connection'
+        '400':
+          description: bad input parameter
+components:
+  schemas:
+    Connection:
+      type: object
+      required:
+        - id
+        - start_date
+        - end_date
+        - distance
+      properties:
+        person:
+          $ref: '#/components/schemas/Person'
+        location:
+          $ref: '#/components/schemas/Location'
+    Person:
+      type: object
+      required:
+        - id
+        - first_name
+        - last_name
+        - company_name
+      properties:
+        id:
+          type: integer
+          example: 2
+        first_name:
+          type: string
+          example: 'Alfredo'
+        last_name:
+          type: string
+          example: 'Ramirez'
+        company_name:
+          type: string
+          example: 'Microsoft'
+    Location:
+      type: object
+      required:
+        - id
+        - person_id
+        - latitude
+        - longitude
+        - creation_time
+      properties:
+        id:
+          type: integer
+          example: 30
+        person_id:
+          type: integer
+          example: 5
+        latitude:
+          type: string
+          example: '-122.290883'
+        longitude:
+          type: string
+          example: '37.55363'
+        creation_time:
+          type: string
+          format: date-time
+          example: '2020-08-15T10:37:06'

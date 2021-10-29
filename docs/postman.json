@@ -1,0 +1,95 @@
+{
+    "info": {
+        "_postman_id": "da7129f9-638e-4791-ab00-0d5ff720d25e",
+        "name": "UdaConnect",
+        "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "01-persons",
+            "item": [
+                {
+                    "name": "Persons",
+                    "id": "a0efb7eb-c295-4fff-a30e-c1e5ce67366f",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": null
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Persons",
+                    "id": "e2b591f8-5588-4613-af9b-4405551a1dba",
+                    "request": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\r\n    \"company_name\": \"Microsoft\",\r\n    \"last_name\": \"Alfredo\",\r\n    \"first_name\": \"Ramirez\"\r\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": "http://localhost:30003/api/persons"
+                    },
+                    "response": []
+                }
+            ],
+            "id": "234b24c2-9ce3-4992-b634-30ad7348ddb9"
+        },
+        {
+            "name": "02-locations",
+            "item": [
+                {
+                    "name": "Locations",
+                    "id": "d343f458-b829-4b39-97c5-4d88734f3079",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": null
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Locations",
+                    "id": "07c985a3-d96a-4287-b18e-2b3fd0c37967",
+                    "request": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\r\n    \"latitude\": \"-122.290883\",\r\n    \"longitude\": \"37.55363\",\r\n    \"creation_time\": \"2020-08-15T10:37:06\",\r\n    \"person_id\": 10\r\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": "http://localhost:30002/api/locations"
+                    },
+                    "response": []
+                }
+            ],
+            "id": "eebe1ede-4c29-4310-a26c-a98bd3fe74cc"
+        },
+        {
+            "name": "03-connections",
+            "item": [
+                {
+                    "name": "Connections",
+                    "id": "7f92be7c-f544-4ca9-a50a-fc635cedb925",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": null
+                    },
+                    "response": []
+                }
+            ],
+            "id": "224daf3b-2bf4-4500-8b3b-0ee18f3f79a7"
+        }
+    ]
+}

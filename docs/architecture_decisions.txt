@@ -1,0 +1,11 @@
+Given the following statement: "This POC was built with the core functionality of ingesting 
+location and identifying individuals who have shared close geographic proximity"
+
+I've decided to refactor Locations API as RESTful for the user to test it out and create a new
+gRPC based microservice that receives gRPC messages from UdaTracker mobile app. This service
+will send location data to kafka in order to handle the volume of mobile devices during the
+convention and that will require a new location consumer service to insert data from kafka
+into the PostgreSQL database.
+
+Connections and Persons API, have been refactored as a separate microservice exposing a
+RESTful API to retrieve and insert data directly into the PostgreSQL database.
