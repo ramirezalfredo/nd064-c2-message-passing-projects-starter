@@ -7,7 +7,11 @@ KAFKA_TOPIC = os.environ["KAFKA_TOPIC"]
 KAFKA_SERVER = os.environ["KAFKA_SERVER"]
 consumer = KafkaConsumer(KAFKA_TOPIC, bootstrap_servers=KAFKA_SERVER)
 
-for message in consumer:
-    print (message.value.decode('utf-8'))
-    
-    location: Location = LocationService.create(message.value.decode('utf-8'))
+print("Starting locations consumer...")
+try:
+    for message in consumer:
+        print (message.value.decode('utf-8'))    
+        location: Location = LocationService.create(message.value.decode('utf-8'))
+except KeyboardInterrupt:
+    print("Stopping locations consumer...")
+    consumer.close()

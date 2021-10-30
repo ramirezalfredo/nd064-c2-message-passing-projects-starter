@@ -31,7 +31,7 @@ spec:
         service: locations-producer
     spec:
       containers:
-      - image: aramirezg/locations-producer:v1
+      - image: aramirezg/locations-producer:v3
         name: locations-producer
         imagePullPolicy: Always
         env:
