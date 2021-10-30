@@ -8,11 +8,10 @@ helm upgrade --install udaconnect  bitnami/kafka
 # kafka-topics.sh --create --topic locations  --bootstrap-server udaconnect-kafka:9092
 # kafka-topics.sh --describe --topic locations --bootstrap-server udaconnect-kafka:9092
 # kafka-console-producer.sh --broker-list udaconnect-kafka:9092 --topic locations
-# kafka-topics.sh --describe --topic locations --bootstrap-server udaconnect-kafka:9092
 # kafka-console-consumer.sh --topic locations --from-beginning --bootstrap-server udaconnect-kafka:9092
 # kafka-delete-records.sh --bootstrap-server udaconnect-kafka-headless:9092
 
-# output from helm chart installation
+## output from helm chart installation
 
 # NAME: udaconnect
 # LAST DEPLOYED: Wed Oct 20 00:50:29 2021

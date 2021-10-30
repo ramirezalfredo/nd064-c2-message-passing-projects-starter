@@ -1,3 +1,59 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    service: locations-producer
+  name: locations-producer
+spec:
+  ports:
+  - name: "5005"
+    port: 5005
+    targetPort: 5005
+    nodePort: 30005
+  selector:
+    service: locations-producer
+  type: NodePort
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    service: locations-producer
+  name: locations-producer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      service: locations-producer
+  template:
+    metadata:
+      labels:
+        service: locations-producer
+    spec:
+      containers:
+      - image: aramirezg/locations-producer:v3
+        name: locations-producer
+        imagePullPolicy: Always
+        env:
+        - name: KAFKA_SERVER
+          valueFrom:
+            configMapKeyRef:
+              name: kafka-env
+              key: KAFKA_SERVER
+        - name: KAFKA_TOPIC
+          valueFrom:
+            configMapKeyRef:
+              name: kafka-env
+              key: KAFKA_TOPIC
+        resources:
+          requests:
+            cpu: 100m
+            memory: 128Mi
+          limits:
+            cpu: 250m
+            memory: 256Mi
+      restartPolicy: Always
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
