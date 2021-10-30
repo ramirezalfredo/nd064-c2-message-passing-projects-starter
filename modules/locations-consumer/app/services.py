@@ -9,9 +9,11 @@ from sqlalchemy.orm import sessionmaker
 from geoalchemy2.functions import ST_AsText, ST_Point
 from sqlalchemy.sql import text
 
+# Logging
 logging.basicConfig(level=logging.WARNING)
 logger = logging.getLogger("connections-api")
 
+# Set up database connection
 engine = create_engine(SQLALCHEMY_DATABASE_URI, echo=True)
 Session = sessionmaker(bind=engine)
 session = Session()

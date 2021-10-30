@@ -3,10 +3,12 @@ from app.models import Location  # noqa
 from app.services import LocationService
 from kafka import KafkaConsumer
 
+# Kafka consumer initialization
 KAFKA_TOPIC = os.environ["KAFKA_TOPIC"]
 KAFKA_SERVER = os.environ["KAFKA_SERVER"]
 consumer = KafkaConsumer(KAFKA_TOPIC, bootstrap_servers=KAFKA_SERVER)
 
+# Consumer startup. Every new message will be processed and saved to the database
 print("Starting locations consumer...")
 try:
     for message in consumer:
